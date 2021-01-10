@@ -65,7 +65,7 @@
           $company = $row['CompanyName'];
       }
   }
-      $final = "SELECT * FROM finalsales WHERE branch = '$branchCode' AND datee = '$date'";
+      $final = "SELECT * FROM finalsales WHERE branch = '$branchCode' AND datee = '$date' LIMIT 20";
       $gofinal = mysqli_query($connect, $final);
 
       $pos = "SELECT SUM(cash) FROM finalsales WHERE branch = '$branchCode'  AND datee = '$date'  AND payment = 'POS'  ";
