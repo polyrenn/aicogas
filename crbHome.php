@@ -13,7 +13,7 @@
     $createStation = new All($connect);
     $new = $createStation->getCustomer($phone);
         
-        $status = urldecode($_GET['details']);
+    $status = urldecode($_GET['details']);
 
     if(!isset($_SESSION['username'])){
         header('Location: portal.php');
@@ -37,8 +37,8 @@
         if($tank == 'Tank A'){
             $tank = $tank;
             $remaining = $tankA;
-            
-            $fish = "SELECT * FROM finalsales WHERE branch = '$branchCode'";
+            $datetank = date('Y-m-d', strtotime('now'));
+            $fish = "SELECT * FROM finalsales WHERE branch = '$branchCode' AND datee = '$datetank'";
             $star = mysqli_query($connect, $fish);
             if(mysqli_num_rows($star) < 0){
                 $openTank = $tankA;
@@ -50,7 +50,7 @@
             $tank = $tank;
             $remaining = $tankB;
             
-            $fish = "SELECT * FROM finalsales WHERE branch = '$branchCode'";
+            $fish = "SELECT * FROM finalsales WHERE branch = '$branchCode' AND datee = '$datetank'";
             $star = mysqli_query($connect, $fish);
             if(mysqli_num_rows($star) < 0){
                 $openTank = $tankB;
