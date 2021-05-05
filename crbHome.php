@@ -1026,7 +1026,7 @@ function printContent(el){
                         <div class='col-12 col-lg-3 '>
                             <div class="bg-warning p-1 rounded shadow">
                                 <h6 align="center" class="text-white">Other</h6>
-                        <?php 
+                        <?php /*
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Others' AND amount != 0 ";
@@ -1135,7 +1135,7 @@ function printContent(el){
                             }
                                 
                         
-                        
+                        */
                         
                         ?>
                     </div>
@@ -1145,7 +1145,7 @@ function printContent(el){
                             <div class="bg-info p-1 rounded shadow" >
 
                                 <h6 align="center" class="text-white">Domestic</h6>
-                        <?php 
+                        <?php /*
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Domestic' AND amount != 0 ";
@@ -1174,7 +1174,7 @@ function printContent(el){
                                 echo "<b class='text-white'> ".number_format($alkga)."</b>";
                                 echo "<hr>";
                             }
-                        
+                        */
                         ?>
                                 
                             </div>
@@ -1185,7 +1185,7 @@ function printContent(el){
                     </div>
                     </div>
                        <hr>
-                        <h5>Total Stats:</h5> <?php 
+                        <h5>Total Stats:</h5> <?php /*
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND amount != 0 ";
@@ -1214,7 +1214,7 @@ function printContent(el){
                                 echo "<b class=''> ".number_format($alkga)." NGN</b>";
                                 echo "<hr>";
                             }
-                        
+                        */
                         ?>
 
                        <!--  <table class='table table-striped table-light' >
@@ -1229,7 +1229,7 @@ function printContent(el){
                         </thead> 
                         <tbody>
             
-                        <?php $createStation->crbReport(); ?>
+                        <?php /* $createStation->crbReport(); */?>
 
                         </tbody>
                             </table> -->
