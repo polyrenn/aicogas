@@ -287,10 +287,27 @@ function printContent(el){
             </div>
 
             <div class="container">
+                <span style="visibility:hidden" class='branchcode'>
+                    <?php
+                        echo $branchCode;
+                    ?>
+                </span>
                 <div class="col btn-group">
                 <button class="btn btn-outline-primary" data-toggle="modal" data-target="#cusReg">Register New Customer</button>
-
-                <button class="btn btn-outline-info" data-toggle="modal" data-target="#report">My report for today</button>
+                <script>
+                    function reportcall() {
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.onreadystatechange = function() {
+                                  if (this.readyState == 4 && this.status == 200) {
+                                    document.getElementById("homereport").innerHTML = this.responseText;
+                                  }
+                                };
+                                let code = parseInt(document.querySelector('.branchcode').innerHTML);
+                                xmlhttp.open("GET", "homereport.php?bcode=" + code, true);
+                                xmlhttp.send();
+                              }
+                </script>
+                <button onclick="reportcall()" class="btn report-btn btn-outline-info" data-toggle="modal" data-target="#report">My report for today</button>
             <!--    <button class="btn btn-outline-danger" > <a href="crbHome2.php" style="text-decoration: none; ">Upload Offline sales</a> </button> -->
                 </div>
                     <h5 class="text-primary mt-2" align="center"><?php echo $status ?></h5>
@@ -1019,225 +1036,8 @@ function printContent(el){
                                     <h5 align='center'><?php echo $username ?>'s Report </h5>
                                     <h6 align="center"> <?php echo date('l jS F (Y-m-d)', strtotime('now')); ?></h6>
                                 </div>
-                                <div style="padding: 8px;">
-                                <div class="contaier">
-                    <h6 align='center'>Report By Categories</h6>
-                    <div class="row">
-                        <div class='col-12 col-lg-3 '>
-                            <div class="bg-warning p-1 rounded shadow">
-                                <h6 align="center" class="text-white">Other</h6>
-                        <?php /*
-                        $dt = date('Y-m-d', strtotime('now'));
-                        
-                            $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Others' AND amount != 0 ";
-                            $goOther = mysqli_query($connect, $Others);
-                            
-                             
-                            if($goOther){
-                                $oth = mysqli_num_rows($goOther);
+                                <div id="homereport">
 
-                                $k = "SELECT SUM(tquant) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Others' AND amount != 0 ";
-                                $kk = mysqli_query($connect, $k);
-                                $kr = mysqli_fetch_array($kk);
-                                $alkg = $kr['SUM(tquant)'];
-
-                                 $ka = "SELECT SUM(amount) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Others' AND amount != 0 ";
-                                $kka = mysqli_query($connect, $ka);
-                                $kra = mysqli_fetch_array($kka);
-                                $alkga = $kra['SUM(amount)'];
-
-                                echo "<b class='text-white'> Sales count</b><br>";
-                                echo "<b class='text-white'>".number_format($oth)." </b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'>Total Kg </b><br>";
-                                echo "<b class='text-white'> ".$alkg." Kg</b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'> Amount</b><br>";
-                                echo "<b class='text-white'> ".number_format($alkga)."</b>";
-                                echo "<hr>";
-                            }
-                
-                        
-                        ?>
-                    </div>
-                        </div>
-                        <div class='col-12 col-lg-3 '>
-                            <div class="bg-success p-1 rounded shadow">
-                                 <h6 align="center" class="text-white">Dealer</h6>
-                        <?php 
-                        $dt = date('Y-m-d', strtotime('now'));
-                        
-                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Dealer' AND amount != 0 ";
-                            $goOther = mysqli_query($connect, $Others);
-                            
-                             
-                            if($goOther){
-                                $oth = mysqli_num_rows($goOther);
-
-                                $k = "SELECT SUM(tquant) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Dealer' AND amount != 0 ";
-                                $kk = mysqli_query($connect, $k);
-                                $kr = mysqli_fetch_array($kk);
-                                $alkg = $kr['SUM(tquant)'];
-
-                                 $ka = "SELECT SUM(amount) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Dealer' AND amount != 0 ";
-                                $kka = mysqli_query($connect, $ka);
-                                $kra = mysqli_fetch_array($kka);
-                                $alkga = $kra['SUM(amount)'];
-
-                               echo "<b class='text-white'> Sales count</b><br>";
-                                echo "<b class='text-white'>".number_format($oth)." </b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'>Total Kg </b><br>";
-                                echo "<b class='text-white'> ".$alkg." Kg</b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'> Amount</b><br>";
-                                echo "<b class='text-white'> ".number_format($alkga)."</b>";
-                                echo "<hr>";
-                            }
-                          
-                       
-                        
-                        ?>
-                    </div>
-                        </div>
-                        <div class='col-12 col-lg-3 '>
-                            <div class="bg-primary p-1 rounded shadow">
-
-                                <h6 align="center" class="text-white">Eatery</h6>
-                        <?php 
-                        $dt = date('Y-m-d', strtotime('now'));
-                        
-                            $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Eatery' AND amount != 0 ";
-                            $goOther = mysqli_query($connect, $Others);
-                            
-                            if($goOther){
-                                $oth = mysqli_num_rows($goOther);
-
-                                $k = "SELECT SUM(tquant) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Eatery' AND amount != 0 ";
-                                $kk = mysqli_query($connect, $k);
-                                $kr = mysqli_fetch_array($kk);
-                                $alkg = $kr['SUM(tquant)'];
-
-                                 $ka = "SELECT SUM(amount) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Eatery' AND amount != 0 ";
-                                $kka = mysqli_query($connect, $ka);
-                                $kra = mysqli_fetch_array($kka);
-                                $alkga = $kra['SUM(amount)'];
-
-                               echo "<b class='text-white'> Sales count</b><br>";
-                                echo "<b class='text-white'>".number_format($oth)." </b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'>Total Kg </b><br>";
-                                echo "<b class='text-white'> ".$alkg." Kg</b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'> Amount</b><br>";
-                                echo "<b class='text-white'> ".number_format($alkga)."</b>";
-                                echo "<hr>";
-                            }
-                                
-                        
-                        */
-                        
-                        ?>
-                    </div>
-                        </div>
-                        <div class='col-12 col-lg-3 '>
-
-                            <div class="bg-info p-1 rounded shadow" >
-
-                                <h6 align="center" class="text-white">Domestic</h6>
-                        <?php /*
-                        $dt = date('Y-m-d', strtotime('now'));
-                        
-                            $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Domestic' AND amount != 0 ";
-                            $goOther = mysqli_query($connect, $Others);
-                            
-                            if($goOther){
-                                $oth = mysqli_num_rows($goOther);
-
-                                $k = "SELECT SUM(tquant) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Domestic' AND amount != 0 ";
-                                $kk = mysqli_query($connect, $k);
-                                $kr = mysqli_fetch_array($kk);
-                                $alkg = $kr['SUM(tquant)'];
-
-                                 $ka = "SELECT SUM(amount) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Domestic' AND amount != 0 ";
-                                $kka = mysqli_query($connect, $ka);
-                                $kra = mysqli_fetch_array($kka);
-                                $alkga = $kra['SUM(amount)'];
-
-                                echo "<b class='text-white'> Sales count</b><br>";
-                                echo "<b class='text-white'>".number_format($oth)." </b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'>Total Kg </b><br>";
-                                echo "<b class='text-white'> ".$alkg." Kg</b><br>";
-                                echo "<hr>";
-                                echo "<b class='text-white'> Amount</b><br>";
-                                echo "<b class='text-white'> ".number_format($alkga)."</b>";
-                                echo "<hr>";
-                            }
-                        */
-                        ?>
-                                
-                            </div>
-                        
-                        </div>
-
-                    
-                    </div>
-                    </div>
-                       <hr>
-                        <h5>Total Stats:</h5> <?php /*
-                        $dt = date('Y-m-d', strtotime('now'));
-                        
-                            $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND amount != 0 ";
-                            $goOther = mysqli_query($connect, $Others);
-                            
-                            if($goOther){
-                                $oth = mysqli_num_rows($goOther);
-
-                                $k = "SELECT SUM(tquant) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND amount != 0 ";
-                                $kk = mysqli_query($connect, $k);
-                                $kr = mysqli_fetch_array($kk);
-                                $alkg = $kr['SUM(tquant)'];
-
-                                 $ka = "SELECT SUM(amount) FROM crbs  WHERE datee = '$dt' AND branch = '$branchCode' AND amount != 0 ";
-                                $kka = mysqli_query($connect, $ka);
-                                $kra = mysqli_fetch_array($kka);
-                                $alkga = $kra['SUM(amount)'];
-
-                                echo "<b class=''> Sales count</b><br>";
-                                echo "<b class=''>".number_format($oth)." Sales today</b><br>";
-                                echo "<hr>";
-                                echo "<b class=''>Total Kg </b><br>";
-                                echo "<b class=''> ".$alkg." Kg</b><br>";
-                                echo "<hr>";
-                                echo "<b class=''> Amount</b><br>";
-                                echo "<b class=''> ".number_format($alkga)." NGN</b>";
-                                echo "<hr>";
-                            }
-                        */
-                        ?>
-
-                       <!--  <table class='table table-striped table-light' >
-                        <thead>
-                        <tr> 
-                        <th scope='col'>CRB#</th>
-                        <th scope='col'>Category</th>
-                        <th scope='col'>Kg</th>
-                    
-                        <th scope='col'>Amount</th>
-                        </tr>
-                        </thead> 
-                        <tbody>
-            
-                        <?php /* $createStation->crbReport(); */?>
-
-                        </tbody>
-                            </table> -->
-
-                    
-                            
-            
-                                </div>
                                 </div>
                     <div class="modal-footer">
 
