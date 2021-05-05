@@ -303,7 +303,7 @@ function printContent(el){
                                   }
                                 };
                                 let code = parseInt(document.querySelector('.branchcode').innerHTML);
-                                xmlhttp.open("GET", "homereport.php?bcode=" + code, true);
+                                xmlhttp.open("GET", "stockdetails.php?bcode=" + code, true);
                                 xmlhttp.send();
                               }
                 </script>
