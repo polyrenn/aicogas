@@ -1,11 +1,13 @@
-                    <div style="padding: 8px;"> 
-                                <div class="contaier">
+                    <?php 
+                    echo "
+                    <div style='padding: 8px;''> 
+                                <div class='contaier'>
                     <h6 align='center'>Report By Categories</h6>
-                    <div class="row">
-                        <div class='col-12 col-lg-3 '>
-                            <div class="bg-warning p-1 rounded shadow">
-                                <h6 align="center" class="text-white">Other</h6>
-                        <?php
+                    <div class='row'>
+                        <div class='col-12 col-lg-3'>
+                            <div class='bg-warning p-1 rounded shadow'>
+                                <h6 align='center' class='text-white'>Other</h6>
+                         ";    
                         require_once ('classes/all.php');
                         if(isset($_GET['bcode'])) {
                             $branchCode = $_GET['bcode'];
@@ -43,13 +45,14 @@
                             }
                 
                         
-                        ?>
+                    echo "    
                     </div>
                         </div>
                         <div class='col-12 col-lg-3 '>
-                            <div class="bg-success p-1 rounded shadow">
-                                 <h6 align="center" class="text-white">Dealer</h6>
-                        <?php 
+                            <div class='bg-success p-1 rounded shadow'>
+                                 <h6 align='center' class='text-white'>Dealer</h6>
+                                 ";
+                         
                         $dt = date('Y-m-d', strtotime('now'));
                         
                              $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Dealer' AND amount != 0 ";
@@ -82,14 +85,14 @@
                           
                        
                         
-                        ?>
+                    echo "
                     </div>
                         </div>
-                        <div class='col-12 col-lg-3 '>
-                            <div class="bg-primary p-1 rounded shadow">
+                        <div class='col-12 col-lg-3'>
+                            <div class='bg-primary p-1 rounded shadow'>
 
-                                <h6 align="center" class="text-white">Eatery</h6>
-                        <?php 
+                                <h6 align='center' class='text-white'>Eatery</h6>
+                        ";      
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Eatery' AND amount != 0 ";
@@ -122,15 +125,15 @@
                         
                         
                         
-                        ?>
+                    echo "
                     </div>
                         </div>
-                        <div class='col-12 col-lg-3 '>
+                        <div class='col-12 col-lg-3'>
 
-                            <div class="bg-info p-1 rounded shadow" >
+                            <div class='bg-info p-1 rounded shadow'>
 
-                                <h6 align="center" class="text-white">Domestic</h6>
-                        <?php 
+                                <h6 align='center' class='text-white'>Domestic</h6>
+                                ";
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND category = 'Domestic' AND amount != 0 ";
@@ -160,7 +163,7 @@
                                 echo "<hr>";
                             }
                         
-                        ?>
+                        echo "
                                 
                             </div>
                         
@@ -170,7 +173,8 @@
                     </div>
                     </div>
                        <hr>
-                        <h5>Total Stats:</h5> <?php 
+                        <h5>Total Stats:</h5>
+                        ";
                         $dt = date('Y-m-d', strtotime('now'));
                         
                             $Others = "SELECT DISTINCT(crbnumber) FROM crbs WHERE datee = '$dt' AND branch = '$branchCode' AND amount != 0 ";
@@ -200,7 +204,7 @@
                                 echo "<hr>";
                             }
                         
-                        ?>
+                        echo "
 
                        <!--  <table class='table table-striped table-light' >
                         <thead>
@@ -213,6 +217,8 @@
                         </tr>
                         </thead> 
                         <tbody>
+
+                        
             
                         <?php  $createStation->crbReport(); ?>
 
@@ -224,3 +230,5 @@
             
                                 </div>
                                 </div>
+                                ";
+                                ?>
