@@ -10,13 +10,16 @@
   <p>Hey</p>
     <script>
          function ff() {
-             fetch('/Offline/text.php')
-    .then(response => response.text())
-    .then(data => console.log(data));
+           
         }
         window.addEventListener('offline', function(e) { console.log('offline'); });
     
-      window.addEventListener('online', ff());
+      window.addEventListener('online', function(e) { 
+          console.log('online'); 
+            fetch('/Offline/text.php')
+    .then(response => response.text())
+    .then(data => console.log(data));
+      });
        
      
     </script>
