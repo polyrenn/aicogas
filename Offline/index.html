@@ -9,9 +9,12 @@
 <body>
   <p>Hey</p>
     <script>
-        window.addEventListener('offline', function(e) { console.log('offline'); });
+        //window.addEventListener('offline', function(e) { console.log('offline'); });
     
-        window.addEventListener('online', function(e) { window.location = "https://www.github.com"; console.log('online'); });
+      //  window.addEventListener('online', function(e) { window.location = "https://www.github.com"; console.log('online'); });
+      fetch('/text.php')
+    .then(response => response.text())
+    .then(data => console.log(data));
     </script>
 </body>
 </html>
