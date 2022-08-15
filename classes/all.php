@@ -2,13 +2,13 @@
     
     error_reporting (E_ALL ^ E_NOTICE);
     
-
+    $connect = mysqli_connect('localhost', 'root', 'aicogas', 'solex');
     
-    // if(!$connect){
-    
-    // }else{
-    //     echo "we connected";
-    // }
+    if(!$connect){
+        echo "Failed";
+     }else{
+         echo "we connected";
+     }
     
     class All{
         private $connect ;
