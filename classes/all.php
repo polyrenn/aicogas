@@ -4,11 +4,11 @@
     
     $connect = mysqli_connect('localhost', 'root', 'aicogas', 'solex');
     
-    if(!$connect){
+   /* if(!$connect){
         echo "Failed";
      }else{
          echo "we connected";
-     }
+     } */
     
     class All{
         private $connect ;
